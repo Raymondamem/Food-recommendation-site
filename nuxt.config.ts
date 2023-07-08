@@ -8,5 +8,9 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+  runtimeConfig: {
+    jwtStrategySecret: "vdbdsfbfdb rgfnrdnbfgbgffsbdf"
   }
+
 })
