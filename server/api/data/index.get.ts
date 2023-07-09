@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import { AppError, createServerError } from "../../../interface/AppError";
+import prisma from "../../db";
 
 export default defineEventHandler(async (event) => {
     try {
@@ -7,20 +8,12 @@ export default defineEventHandler(async (event) => {
         if ( !user) {
             throw new AppError(401, "Not Authorize");
         }
+        const query = getQuery(event);
 
-        if (user.type !== "ADMIN") {
-            throw new AppError(401, "Not Authorize");
-        }
+        const diseases = await prisma.disease.findMany();
 
-        return {
-            id: user.id,
-            email: user.email,
-            fullName: user.fullName,
-            type: user.type,
-            diseaseIds: user.diseaseIds
-        };
-
-    } catch (err: any) {
+        return diseases;
+    } catch(err: any) {
         if (err instanceof AppError) {
             sendError(event, createServerError(err.statusCode, err.message, err.errorObject));
         }

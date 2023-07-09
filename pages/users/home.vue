@@ -285,7 +285,12 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
+definePageMeta({
+  middleware: "regular-auth"
+});
+
+
 </script>
 <style lang="scss">
 .foodGalleryMainWrapper {

@@ -13,9 +13,6 @@ export default defineEventHandler(async (event) => {
         if (!validate.success) {
             throw new AppError(422, "Invalid Params", validate.error.message);
         }
-        if (body.password !== body.confirmPassword) {
-            throw new AppError(422, "Comfirm password not the same as password");
-        }
 
         const userExist = await prisma.user.findUnique({ where: { email: body.email } });
         if (userExist) {
@@ -23,7 +20,7 @@ export default defineEventHandler(async (event) => {
         }
 
         const hashedPassword = await generateHashedPassword(body.password);
-        const diseases = await prisma.disease.findMany({ where: { id: { in: body.diseases } }, select: {id: true} });
+        const diseases = await prisma.disease.findMany({ where: { id: { in: body.diseaseIds } }, select: {id: true} });
         const newUser = await prisma.user.create({
             data: {
                 email: body.email,
@@ -34,7 +31,9 @@ export default defineEventHandler(async (event) => {
             select: {
                 id: true,
                 email: true,
-                fullName: true
+                fullName: true,
+                type: true,
+                diseaseIds: true
             }
         });
 
@@ -43,7 +42,7 @@ export default defineEventHandler(async (event) => {
         return {
             success: true,
             token,
-            newUser
+            user: newUser
         };
     } catch (err: any) {
         if (err instanceof AppError) {

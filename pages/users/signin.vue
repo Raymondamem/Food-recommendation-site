@@ -1,8 +1,8 @@
 <template>
   <div class="usere_signup_wrapper">
     <div class="usere_signup_wrapper_form">
-      <form action="/users/signup" method="post">
-      <h1 style="text-align: center">User's SIgnIn</h1>
+      <form @submit.prevent="signin">
+        <h1 style="text-align: center">User's SIgnIn</h1>
         <div>
           <label for="email">Email</label>
           <input
@@ -10,6 +10,7 @@
             id="email"
             name="email"
             placeholder="eg:example@[gmail or yahoo].com"
+            v-model="email"
           />
         </div>
         <div>
@@ -19,10 +20,11 @@
             id="password"
             name="password"
             placeholder="eg:XXXXXXXXXXX"
+            v-model="password"
           />
         </div>
         <div style="margin-top: 1rem;">
-          <button type="submit">SUBMIT</button>
+          <button type="submit">{{ loading ? "Loading" : "SUBMIT"}}</button>
         </div>
         <p class="hav_acc">
           <span>Don't have account? Create </span>
@@ -33,12 +35,31 @@
     </div>
   </div>
 </template>
-<script>
-import { defineComponent } from "@vue/composition-api";
+<script setup lang="ts">
 
-export default defineComponent({
-  setup() {},
-});
+const { login } = useAuth();
+
+const email = ref("");
+const password = ref("");
+
+const loading = ref(false);
+
+async function signin() {
+  try {
+    loading.value = true;
+    const loggedIn = await login({
+      email: email.value,
+      password: password.value
+    });
+    loading.value = false;
+    if (loggedIn) {
+      navigateTo("/users/home");
+    }
+  } catch (err: any) {
+    loading.value = false;
+    alert("Error Registering");
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -8,8 +8,7 @@ export const  userSchema = z.object({
     fullName: z.string(),
     email: z.string().email(),
     password: z.string(),
-    confirmPassword: z.string(),
-    diseases: z.array(z.string())
+    diseaseIds: z.array(z.string())
 });
 
 export const foodSchema = z.object({

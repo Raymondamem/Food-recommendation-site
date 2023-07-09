@@ -2,18 +2,26 @@
   <header>
     <div class="container">
       <div class="logo">
-        <a href="/">FRS</a>
+        <NuxtLink href="/">FRS</NuxtLink>
       </div>
       <nav>
         <NuxtLink href="/">Home</NuxtLink>
-        <NuxtLink href="/users/">User's Signup</NuxtLink>
-        <NuxtLink href="/users/signin">User's Signin</NuxtLink>
-        <NuxtLink href="/admin/">Admin Signin</NuxtLink>
+        <NuxtLink v-if="!user" href="/users/">User's Signup</NuxtLink>
+        <NuxtLink v-if="!user" href="/users/signin">User's Signin</NuxtLink>
+        <NuxtLink v-if="!user" href="/admin/">Admin Signin</NuxtLink>
+
+        <NuxtLink v-if="user" @click.prevent="logout">Logout</NuxtLink>
       </nav>
-      <NuxtLink to="#">Order Food</NuxtLink>
+      <NuxtLink to="/users/home">Order Food</NuxtLink>
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+const { useUser, logout } = useAuth();
+const user = useUser();
+</script>
+
 <style lang="scss">
 header {
   box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.5);
@@ -46,7 +54,7 @@ header {
       justify-content: space-between;
       align-items: center;
 
-      a {
+      a, button {
         text-decoration: none;
         position: relative;
         display: block;

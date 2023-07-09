@@ -4,10 +4,6 @@ import prisma from "../../db";
 
 export default defineEventHandler(async (event) => {
     try {
-        const user: User = event.context.user;
-        if ( !user) {
-            throw new AppError(401, "Not Authorize");
-        }
         const diseases = await prisma.disease.findMany();
 
         return diseases;

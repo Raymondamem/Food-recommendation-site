@@ -1,15 +1,16 @@
 <template>
   <div class="usere_signup_wrapper">
     <div class="usere_signup_wrapper_form">
-      <form action="/users/signin" method="post">
+      <form @submit.prevent="signup">
         <h1 style="text-align: center">User's SIgnUp</h1>
         <div>
-          <label for="name">Username</label>
+          <label for="name">Full Name</label>
           <input
             type="text"
             id="name"
             name="name"
             placeholder="eg:Raymond Amem"
+            v-model="fullName"
           />
         </div>
         <div>
@@ -19,6 +20,7 @@
             id="email"
             name="email"
             placeholder="eg:example@[gmail or yahoo].com"
+            v-model="email"
           />
         </div>
         <div>
@@ -28,85 +30,24 @@
             id="password"
             name="password"
             placeholder="eg:XXXXXXXXXXX"
+            v-model="password"
           />
         </div>
         <h3>Medical Issues</h3>
-        <div class="medical_wrap">
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
-          </div>
-          <div>
-            <label for="medical_issus">Diabities</label>
-            <input type="checkbox" id="medical_issus" name="medical_issus" />
+        <div v-if="error">
+          <p>{{ error.message }}</p>
+        </div>
+        <div v-else-if="pending">
+          <p>Loading</p>
+        </div>
+        <div v-else-if="diseases" class="medical_wrap">
+          <div v-for="disease in diseases" :key="disease.id">
+            <label :for="disease.id">{{ disease.name }}</label>
+            <input type="checkbox" :id="disease.id" :value="disease.id" v-model="selected_diseases" />
           </div>
         </div>
-        <div>
-          <button type="submit">SUBMIT</button>
+        <div> 
+          <button type="submit">{{ loading ? "Loading" : "SUBMIT"}}</button>
         </div>
         <p class="hav_acc">
           <span>Already have account? </span>
@@ -117,12 +58,43 @@
     </div>
   </div>
 </template>
-<script>
-import { defineComponent } from "@vue/composition-api";
+<script setup lang="ts">
+import { Disease } from '@prisma/client';
 
-export default defineComponent({
-  setup() {},
-});
+const { register } = useAuth();
+
+const fullName = ref("");
+const email = ref("");
+const password = ref("");
+const selected_diseases = ref<string[]>([]);
+const diseases = ref<Disease[] | null>(null);
+
+const loading = ref(false);
+
+const { data, error, pending } = await useFetch("/api/data/disease");
+if (!error.value) {
+  diseases.value = data.value;
+}
+
+async function signup() {
+  try {
+    loading.value = true;
+    const registered = await register({
+      fullName: fullName.value,
+      email: email.value,
+      password: password.value,
+      diseaseIds: selected_diseases.value
+    });
+    loading.value = false;
+    
+    if (registered) {
+      navigateTo("/users/home");
+    }
+  } catch (err: any) {
+    loading.value = false;
+    alert("Error Registering");
+  }
+}
 </script>
 
 <style lang="scss" scoped>
