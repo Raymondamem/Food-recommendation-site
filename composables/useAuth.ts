@@ -29,6 +29,17 @@ export default () => {
         return true;
     }
 
+    const adminLogin = async (body: LoginI) => {
+        const data = await $fetch("/api/auth/admin/login", {
+            method: "post",
+            body
+        });
+
+        setUser(data.user);
+        setAccessToken(data.token);
+        return true;
+    }
+
     const register = async(body: RegisterI) => {
         const data = await $fetch("/api/auth/register", {
             method: "post",
@@ -70,8 +81,10 @@ export default () => {
     return {
         useUser,
         login,
+        adminLogin,
         register,
         logout,
-        initAuth
+        initAuth,
+        useAccessToken
     }
 }

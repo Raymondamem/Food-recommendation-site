@@ -1,7 +1,7 @@
-import { AppError, createServerError } from "../../../interface/AppError";
-import prisma from "../../db";
-import { compareHashedPassword } from "../../utils/generateHashedPassword";
-import { generateAccessToken } from "../../utils/jwt";
+import { AppError, createServerError } from "../../../../interface/AppError";
+import prisma from "../../../db";
+import { compareHashedPassword } from "../../../utils/generateHashedPassword";
+import { generateAccessToken } from "../../../utils/jwt";
 
 export default defineEventHandler(async (event) => {
     try {
@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
             throw new AppError(422, "User not found");
         }
 
-        if (user.type === "ADMIN") {
+        if (user.type === "REGULAR") {
             throw new AppError(401, "can't log in :)");
         }
 

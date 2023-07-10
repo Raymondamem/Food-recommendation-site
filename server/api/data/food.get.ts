@@ -8,11 +8,10 @@ export default defineEventHandler(async (event) => {
         if ( !user) {
             throw new AppError(401, "Not Authorize");
         }
-        const query = getQuery(event);
 
-        const diseases = await prisma.disease.findMany();
+        const foods = prisma.food.findMany();
 
-        return diseases;
+        return foods;
     } catch(err: any) {
         if (err instanceof AppError) {
             sendError(event, createServerError(err.statusCode, err.message, err.errorObject));

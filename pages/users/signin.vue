@@ -24,7 +24,7 @@
           />
         </div>
         <div style="margin-top: 1rem;">
-          <button type="submit">{{ loading ? "Loading" : "SUBMIT"}}</button>
+          <button :disabled="loading" type="submit">{{ loading ? "Loading" : "SUBMIT"}}</button>
         </div>
         <p class="hav_acc">
           <span>Don't have account? Create </span>

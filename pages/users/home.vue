@@ -8,273 +8,31 @@
           <input type="search" name="food-search" placeholder="Search food" />
         </div>
       </div>
-      <div class="food_gallery_wrap">
+      <div v-if="error">
+        <p style="color: red; font-size: larger;">{{ error.message }}</p>
+      </div>
+      <div v-else-if="pending">
+        <p style="color: red; font-size: larger;">Loading</p>
+      </div>
+      <div v-else-if="data?.length === 0">
+        <p style="color: red; font-size: larger;">EMPTY</p>
+      </div>
+      <div v-else-if="data" class="food_gallery_wrap">
         <!-- /////////////////////////////////////////////////// -->
-        <div class="food_item">
+        <div v-for="food in foods" :key="food.id" class="food_item">
           <div>
             <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
+              :src="`/uploads/${food.imagePath}`"
+              :alt="`${food.name} image`"
             />
           </div>
           <div>
             <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
+              {{ food.name }}
             </p>
             <div>
               <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
-              </p>
-              <button class="buyFood">Buy</button>
-            </div>
-          </div>
-        </div>
-        <div class="food_item">
-          <div>
-            <img
-              src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-              alt="pexels-rajesh-tp-1624487"
-            />
-          </div>
-          <div>
-            <p class="nameOfFood">
-              Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-              nesciunt incidunt non expedita blanditiis natus odit doloremque
-              maxime, reiciendis architecto magni soluta magnam! Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Maxime velit vitae
-              eos suscipit doloremque sequi dolor, libero fugiat eligendi quia
-              praesentium amet quae officia! Sequi nemo iste voluptatem maxime
-              debitis. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Ut, quo assumenda a reiciendis veritatis voluptatum eaque totam
-              odio, obcaecati exercitationem earum facere eveniet consequatur
-              commodi ipsa sit impedit error! Voluptas!
-            </p>
-            <div>
-              <p class="prizeOfFood">
-                <span>₦</span><span id="amount">1700</span>
+                <span>₦</span><span id="amount">{{food.price}}</span>
               </p>
               <button class="buyFood">Buy</button>
             </div>
@@ -286,10 +44,26 @@
   </div>
 </template>
 <script setup lang="ts">
+import { Food } from '@prisma/client';
+
 definePageMeta({
   middleware: "regular-auth"
 });
 
+const { useAccessToken } = useAuth();
+const accessToken = useAccessToken();
+
+const foods = ref<Food[] | null>([]);
+
+const {data, pending, error} = await useLazyFetch("/api/data/food", {
+  headers: {
+    authorization: `Bearer ${accessToken.value}`
+  }
+});
+
+if (!error.value) {
+  foods.value = data.value;
+}
 
 </script>
 <style lang="scss">
@@ -352,6 +126,7 @@ definePageMeta({
           & > img {
             width: 100%;
             height: 400px;
+            object-fit: cover;
           }
         }
 

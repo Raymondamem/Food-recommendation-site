@@ -13,7 +13,6 @@ export const  userSchema = z.object({
 
 export const foodSchema = z.object({
     name: z.string(),
-    description: z.string(),
     price: z.number(),
-    diseases: z.array(z.string())
+    diseaseIds: z.array(z.string())
 });

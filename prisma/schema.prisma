@@ -35,8 +35,8 @@ model User {
 model Food {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  description String
   price       Float
   Disease     Disease? @relation(fields: [diseaseIds], references: [id])
   diseaseIds  String[] @db.ObjectId
+  imagePath   String
 }

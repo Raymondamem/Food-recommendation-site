@@ -7,6 +7,7 @@
           <NuxtLink href="/">Home</NuxtLink>
           <NuxtLink href="#add-desiese">Add Desiese</NuxtLink>
           <NuxtLink href="#add-food">Add Food</NuxtLink>
+          <NuxtLink @click.prevent="logout">Logout</NuxtLink>
         </nav>
       </div>
     </header>
@@ -17,243 +18,30 @@
     >
       <div class="container">
         <h3>Add Desiese related to a meal</h3>
-        <form action="/admin/home" method="post">
+        <form @submit.prevent="addDisease">
           <div class="meal_desies">
             <label for="desiese">
               <input
                 type="text"
                 id="desiese"
                 placeholder="Add Desiese of a meal"
+                v-model="disease"
               />
             </label>
-            <button type="submit">ADD DESIESE</button>
+            <button :disabled="diseaseLoading" type="submit">{{diseaseLoading ? "Loading" : "ADD DESIESE"}}</button>
           </div>
         </form>
         <h3>All Desiese</h3>
-        <div class="medical_wrap">
+        <div v-if="error">
+          <p>{{ error.message }}</p>
+        </div>
+        <div v-else-if="pending">
+          <p>Loading</p>
+        </div>
+        <div v-else-if="diseases" class="medical_wrap">
           <!-- ///////////////////////// -->
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
-            <span>x</span>
-          </div>
-          <div>
-            <label for="medical_issus">Leg Headach</label>
+          <div v-for="disease in diseases" :key="disease.id">
+            <label for="medical_issus">{{ disease.name }}</label>
             <span>x</span>
           </div>
           <!-- //////////////////////////// -->
@@ -267,241 +55,68 @@
     >
       <div class="container">
         <h3>Add Food to the Food Gallery</h3>
-        <form action="/admin/home" method="post">
+        <form @submit.prevent="addFood">
           <div>
             <!-- <label for="name">Food Name</label> -->
-            <input type="text" id="name" placeholder="Name of Meal" />
+            <input
+              type="text"
+              id="name"
+              placeholder="Name of Meal"
+              v-model="foodName"
+            />
           </div>
 
           <div>
             <!-- <label for="prise">Prise Food</label> -->
-            <input type="text" id="prise" placeholder="Prise of Meal" />
+            <input
+              type="text"
+              id="prise"
+              placeholder="Prise of Meal"
+              v-model.number="foodPrice"
+            />
           </div>
 
           <div>
             <label for="foodimg">Food Image</label>
-            <input type="file" id="foodimg" />
+            <input type="file" id="foodimg" @change="loadFile" />
+          </div>
+
+          <div class="select">
+            <label for="diseases">Select Diseases</label>
+            <select multiple v-model="selected_diseases">
+              <option
+                v-for="disease in diseases"
+                :key="disease.id"
+                :value="disease.id"
+              >
+                {{ disease.name }}
+              </option>
+            </select>
           </div>
 
           <div>
-            <button type="submit">ADD FOOD</button>
+            <button :disabled="foodLoading" type="submit">
+              {{ foodLoading ? "Loading" : "Add Food" }}
+            </button>
           </div>
         </form>
         <div class="wrap_food_edit">
           <div class="food_gallery_wrap">
             <!-- /////////////////////////////////////////////////// -->
-            <div class="food_item">
+            <div v-for="food in foods" :key="food.id" class="food_item">
               <div>
                 <img
-                  src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-                  alt="pexels-rajesh-tp-1624487"
+                  :src="`/uploads/${food.imagePath}`"
+                  :alt="`${food.name} image`"
                 />
               </div>
               <div>
                 <p class="nameOfFood">
-                  Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                  amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-                  nesciunt incidunt non expedita blanditiis natus odit
-                  doloremque maxime, reiciendis architecto magni soluta magnam!
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Maxime velit vitae eos suscipit doloremque sequi dolor, libero
-                  fugiat eligendi quia praesentium amet quae officia! Sequi nemo
-                  iste voluptatem maxime debitis. Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ut, quo assumenda a reiciendis
-                  veritatis voluptatum eaque totam odio, obcaecati
-                  exercitationem earum facere eveniet consequatur commodi ipsa
-                  sit impedit error! Voluptas!
+                  {{ food.name }}
                 </p>
                 <div>
                   <p class="prizeOfFood">
-                    <span>₦</span><span id="amount">1700</span>
-                  </p>
-                  <button class="buyFood">Delete food</button>
-                </div>
-              </div>
-            </div>
-            <div class="food_item">
-              <div>
-                <img
-                  src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-                  alt="pexels-rajesh-tp-1624487"
-                />
-              </div>
-              <div>
-                <p class="nameOfFood">
-                  Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                  amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-                  nesciunt incidunt non expedita blanditiis natus odit
-                  doloremque maxime, reiciendis architecto magni soluta magnam!
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Maxime velit vitae eos suscipit doloremque sequi dolor, libero
-                  fugiat eligendi quia praesentium amet quae officia! Sequi nemo
-                  iste voluptatem maxime debitis. Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ut, quo assumenda a reiciendis
-                  veritatis voluptatum eaque totam odio, obcaecati
-                  exercitationem earum facere eveniet consequatur commodi ipsa
-                  sit impedit error! Voluptas!
-                </p>
-                <div>
-                  <p class="prizeOfFood">
-                    <span>₦</span><span id="amount">1700</span>
-                  </p>
-                  <button class="buyFood">Delete food</button>
-                </div>
-              </div>
-            </div>
-            <div class="food_item">
-              <div>
-                <img
-                  src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-                  alt="pexels-rajesh-tp-1624487"
-                />
-              </div>
-              <div>
-                <p class="nameOfFood">
-                  Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                  amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-                  nesciunt incidunt non expedita blanditiis natus odit
-                  doloremque maxime, reiciendis architecto magni soluta magnam!
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Maxime velit vitae eos suscipit doloremque sequi dolor, libero
-                  fugiat eligendi quia praesentium amet quae officia! Sequi nemo
-                  iste voluptatem maxime debitis. Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ut, quo assumenda a reiciendis
-                  veritatis voluptatum eaque totam odio, obcaecati
-                  exercitationem earum facere eveniet consequatur commodi ipsa
-                  sit impedit error! Voluptas!
-                </p>
-                <div>
-                  <p class="prizeOfFood">
-                    <span>₦</span><span id="amount">1700</span>
-                  </p>
-                  <button class="buyFood">Delete food</button>
-                </div>
-              </div>
-            </div>
-            <div class="food_item">
-              <div>
-                <img
-                  src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-                  alt="pexels-rajesh-tp-1624487"
-                />
-              </div>
-              <div>
-                <p class="nameOfFood">
-                  Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                  amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-                  nesciunt incidunt non expedita blanditiis natus odit
-                  doloremque maxime, reiciendis architecto magni soluta magnam!
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Maxime velit vitae eos suscipit doloremque sequi dolor, libero
-                  fugiat eligendi quia praesentium amet quae officia! Sequi nemo
-                  iste voluptatem maxime debitis. Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ut, quo assumenda a reiciendis
-                  veritatis voluptatum eaque totam odio, obcaecati
-                  exercitationem earum facere eveniet consequatur commodi ipsa
-                  sit impedit error! Voluptas!
-                </p>
-                <div>
-                  <p class="prizeOfFood">
-                    <span>₦</span><span id="amount">1700</span>
-                  </p>
-                  <button class="buyFood">Delete food</button>
-                </div>
-              </div>
-            </div>
-            <div class="food_item">
-              <div>
-                <img
-                  src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-                  alt="pexels-rajesh-tp-1624487"
-                />
-              </div>
-              <div>
-                <p class="nameOfFood">
-                  Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                  amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-                  nesciunt incidunt non expedita blanditiis natus odit
-                  doloremque maxime, reiciendis architecto magni soluta magnam!
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Maxime velit vitae eos suscipit doloremque sequi dolor, libero
-                  fugiat eligendi quia praesentium amet quae officia! Sequi nemo
-                  iste voluptatem maxime debitis. Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ut, quo assumenda a reiciendis
-                  veritatis voluptatum eaque totam odio, obcaecati
-                  exercitationem earum facere eveniet consequatur commodi ipsa
-                  sit impedit error! Voluptas!
-                </p>
-                <div>
-                  <p class="prizeOfFood">
-                    <span>₦</span><span id="amount">1700</span>
-                  </p>
-                  <button class="buyFood">Delete food</button>
-                </div>
-              </div>
-            </div>
-            <div class="food_item">
-              <div>
-                <img
-                  src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-                  alt="pexels-rajesh-tp-1624487"
-                />
-              </div>
-              <div>
-                <p class="nameOfFood">
-                  Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                  amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-                  nesciunt incidunt non expedita blanditiis natus odit
-                  doloremque maxime, reiciendis architecto magni soluta magnam!
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Maxime velit vitae eos suscipit doloremque sequi dolor, libero
-                  fugiat eligendi quia praesentium amet quae officia! Sequi nemo
-                  iste voluptatem maxime debitis. Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ut, quo assumenda a reiciendis
-                  veritatis voluptatum eaque totam odio, obcaecati
-                  exercitationem earum facere eveniet consequatur commodi ipsa
-                  sit impedit error! Voluptas!
-                </p>
-                <div>
-                  <p class="prizeOfFood">
-                    <span>₦</span><span id="amount">1700</span>
-                  </p>
-                  <button class="buyFood">Delete food</button>
-                </div>
-              </div>
-            </div>
-            <div class="food_item">
-              <div>
-                <img
-                  src="~/assets/imgs/pexels-rajesh-tp-1624487.jpg"
-                  alt="pexels-rajesh-tp-1624487"
-                />
-              </div>
-              <div>
-                <p class="nameOfFood">
-                  Food name 1 Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                  amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corporis, rerum ex possimus mollitia saepe tenetur laudantium
-                  nesciunt incidunt non expedita blanditiis natus odit
-                  doloremque maxime, reiciendis architecto magni soluta magnam!
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Maxime velit vitae eos suscipit doloremque sequi dolor, libero
-                  fugiat eligendi quia praesentium amet quae officia! Sequi nemo
-                  iste voluptatem maxime debitis. Lorem ipsum dolor sit, amet
-                  consectetur adipisicing elit. Ut, quo assumenda a reiciendis
-                  veritatis voluptatum eaque totam odio, obcaecati
-                  exercitationem earum facere eveniet consequatur commodi ipsa
-                  sit impedit error! Voluptas!
-                </p>
-                <div>
-                  <p class="prizeOfFood">
-                    <span>₦</span><span id="amount">1700</span>
+                    <span>₦</span><span id="amount">{{ food.price }}</span>
                   </p>
                   <button class="buyFood">Delete food</button>
                 </div>
@@ -514,7 +129,107 @@
     </section>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
+import { Disease, Food } from "@prisma/client";
+
+definePageMeta({
+  middleware: "admin-auth",
+});
+
+const { useAccessToken } = useAuth();
+const token = useAccessToken();
+
+const disease = ref("");
+const selected_diseases = ref<string[]>([]);
+const diseases = ref<Disease[] | null>(null);
+
+const foods = ref<Food[] | null>([]);
+
+const {
+  data: foodData,
+  pending: foodPending,
+  error: foodError,
+} = await useLazyFetch("/api/data/food", {
+  headers: {
+    authorization: `Bearer ${token.value}`,
+  },
+});
+if (!foodError.value) {
+  foods.value = foodData.value;
+}
+
+const { data, error, pending } = await useFetch("/api/data/disease");
+if (!error.value) {
+  diseases.value = data.value;
+}
+
+let imageFile: any = null;
+const foodName = ref("");
+const foodPrice = ref(0);
+
+function loadFile(event: any) {
+  imageFile = event.target.files[0];
+}
+
+const diseaseLoading = ref(false);
+async function addDisease() {
+  try {
+    diseaseLoading.value = true;
+    const data = await $fetch("/api/data/disease", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token.value}`,
+      },
+      body: {
+        name: disease.value
+      }
+    });
+
+    disease.value = "";
+    alert("Added Disease");
+    diseases.value?.push(data.newDisease);
+  } catch (err: any) {
+    alert("Error adding Disease");
+    diseaseLoading.value = false;
+  }
+}
+
+const foodLoading = ref(false);
+async function addFood() {
+  try {
+    foodLoading.value = true;
+    const form = new FormData();
+    form.append("name", foodName.value);
+    form.append("price", foodPrice.value.toString());
+    form.append("diseaseIds", JSON.stringify(selected_diseases.value));
+    if (imageFile === null) {
+      alert("Select an image please");
+      return;
+    }
+    form.append("image", imageFile);
+
+    const data = await $fetch("/api/data/food", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token.value}`,
+      },
+      body: form,
+    });
+
+    alert("Added food");
+    foodLoading.value = false;
+    foodName.value = "";
+    foodPrice.value = 0;
+    selected_diseases.value = [];
+
+    foods.value?.push(data);
+  } catch (err: any) {
+    alert("Error adding food");
+    foodLoading.value = false;
+  }
+}
+
+const { logout } = useAuth();
 </script>
 <style lang="scss" scoped>
 .admin_wrapper_home {
@@ -662,6 +377,26 @@
           &:hover {
             background: white;
             color: red;
+          }
+        }
+      }
+
+      .select {
+        &,
+        & * {
+          display: block !important;
+        }
+        width: 50% !important;
+        & select,
+        & label {
+          width: 100% !important;
+          height: fit-content;
+        }
+
+        & select {
+          margin-top: 0.5rem;
+          &::-webkit-scrollbar {
+            display: none;
           }
         }
       }
