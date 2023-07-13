@@ -188,6 +188,7 @@ async function addDisease() {
     disease.value = "";
     alert("Added Disease");
     diseases.value?.push(data.newDisease);
+    diseaseLoading.value = false;
   } catch (err: any) {
     alert("Error adding Disease");
     diseaseLoading.value = false;

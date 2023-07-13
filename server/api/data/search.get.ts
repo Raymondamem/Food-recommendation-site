@@ -5,21 +5,20 @@ import prisma from "../../db";
 export default defineEventHandler(async (event) => {
     try {
         const user: User = event.context.user;
-        if ( !user) {
+        if (!user) {
             throw new AppError(401, "Not Authorize");
         }
 
-        const { recommend } = getQuery(event) as {recommend: "YES" | "NO"};
-        // console.log(user);
-        if (recommend === "YES") {
-            const foods = await prisma.food.findMany({where: {NOT: {diseaseIds: {hasEvery: user.diseaseIds}}}});
-            // console.log(foods);
-            return foods;
-        }
-        const foods = await prisma.food.findMany();
-
-        return foods;
-    } catch(err: any) {
+        const { q } = getQuery(event) as { q: string };
+        const foods = await prisma.food.findMany({
+            where: {
+                NOT: { diseaseIds: { hasEvery: user.diseaseIds } },
+            }
+        });
+        
+        const filteredFood = foods.filter(f => f.name.includes(q));
+        return filteredFood;
+    } catch (err: any) {
         if (err instanceof AppError) {
             sendError(event, createServerError(err.statusCode, err.message, err.errorObject));
         }

@@ -4,9 +4,14 @@
     <div class="container">
       <div class="foodGalleryMainWrapper_header">
         <h3>Food Gallery</h3>
-        <div>
-          <input type="search" name="food-search" placeholder="Search food" />
-        </div>
+        <form @submit.prevent="searchFood">
+          <input
+            type="search" 
+            name="food-search" 
+            placeholder="Search food"
+            v-model="searchQuery"
+          />
+        </form>
       </div>
       <div v-if="error">
         <p style="color: red; font-size: larger;">{{ error.message }}</p>
@@ -55,7 +60,34 @@ const accessToken = useAccessToken();
 
 const foods = ref<Food[] | null>([]);
 
+const searchQuery = ref("");
+async function searchFood(e: any) {
+  
+  if (searchQuery.value.length > 0) {
+    const data = await $fetch("/api/data/search", {
+      query: {q: searchQuery.value},
+      headers: {
+        authorization: `Bearer ${accessToken.value}`
+      }
+    });
+
+    foods.value = data;
+  } else {
+    const data = await $fetch("/api/data/food", {
+      query: {recommend: "YES"},
+      headers: {
+        authorization: `Bearer ${accessToken.value}`
+      }
+    });
+
+    foods.value = data;
+  }
+}
+
 const {data, pending, error} = await useLazyFetch("/api/data/food", {
+  query: {
+    recommend: "YES"
+  },
   headers: {
     authorization: `Bearer ${accessToken.value}`
   }
@@ -87,7 +119,7 @@ if (!error.value) {
       flex: 0 1 250px;
     }
 
-    & > div {
+    & > form {
       width: 50%;
       flex: 0 1 350px;
       margin: .5rem 0;
@@ -221,13 +253,13 @@ if (!error.value) {
       //   transition: all 0.3s ease-in-out !important;
       // }
 
-      &:hover {
+      // &:hover {
         // &::before {
         //   background: white !important;
         //   color: red !important;
         //   width: 50% !important;
         // }
-      }
+      // }
     }
   }
 }

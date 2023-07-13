@@ -7,14 +7,17 @@ export default defineEventHandler(async (event) => {
     const endpoints = [
         "/api/auth/user",
         "/api/data/disease",
-        "/api/data/food"
+        "/api/data/food",
+        "/api/data/search"
     ];
 
     const isHandledMyThisMiddleware = endpoints.some(endpoint => {
         const pattern = new UrlPattern(endpoint);
 
         if (!event.node.req.url) return false;
-        return pattern.match(event.node.req.url);
+
+        const currentUrl = event.node.req.url.split("?")[0];
+        return pattern.match(currentUrl);
     });
 
     if (isHandledMyThisMiddleware) {
